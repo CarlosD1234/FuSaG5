@@ -32,12 +32,12 @@ export default function Home() {
         </p>
 */}
         <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
+          <a href="/Principal" className="card">
             <h3>Iniciar &rarr;</h3>
             <p>Sube tu archivo .mp3</p>
           </a>
 
-          <a href="https://nextjs.org/learn" className="card">
+          <a href="/Tutorial" className="card">
             <h3>Instrucciones &rarr;</h3>
             <p>Tutorial de como subir tu archivo .mp3 en FuSA</p>
           </a>
@@ -86,7 +86,7 @@ export default function Home() {
         }
 
         footer img {
-          margin-left: 95rem;
+          margin-left: 60rem;
         }
 
         footer a {
