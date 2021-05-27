@@ -33,24 +33,15 @@ export default function Home() {
 */}
         <div className="grid">
           <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
+            <h3>Iniciar &rarr;</h3>
+            <p>Sube tu archivo .mp3</p>
           </a>
 
           <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
+            <h3>Instrucciones &rarr;</h3>
+            <p>Tutorial de como subir tu archivo .mp3 en FuSA</p>
           </a>
 
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="card"
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          
         </div>
       </main>
 
@@ -95,7 +86,7 @@ export default function Home() {
         }
 
         footer img {
-          margin-left: 0.5rem;
+          margin-left: 95rem;
         }
 
         footer a {
@@ -186,7 +177,7 @@ export default function Home() {
         }
 
         .logo {
-          height: 1em;
+          height: 5em;
         }
 
         @media (max-width: 600px) {
