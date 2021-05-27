@@ -34,12 +34,12 @@ export default function Home() {
         <div className="grid">
           <a href="/Principal" className="card">
             <h3>Iniciar &rarr;</h3>
-            <p>Sube tu archivo .mp3</p>
+            <p>Sube tu archivo .wav</p>
           </a>
 
           <a href="/Tutorial" className="card">
             <h3>Instrucciones &rarr;</h3>
-            <p>Tutorial de como subir tu archivo .mp3 en FuSA</p>
+            <p>Tutorial de como subir tu archivo .wav en FuSA</p>
           </a>
 
         </div>
