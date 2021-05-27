@@ -1,7 +1,19 @@
 import Head from 'next/head'
 import Link from "next/link";
 import Image from "next/image";
+import * as React from "react"
 
+// 1. import `ChakraProvider` component
+import { ChakraProvider } from "@chakra-ui/react"
+
+function App({ Component }) {
+  // 2. Use at the root of your app
+  return (
+    <ChakraProvider>
+      <Component />
+    </ChakraProvider>
+  )
+}
 export default function Home() {
   return (
     <div className="container">
