@@ -24,7 +24,7 @@ export default function Home() {
 
       <main>
         <h1 className="title">
-          <a href="https://github.com/CarlosD1234/INFO104FuSa">FuSa </a> Valdivia
+          <a href="https://github.com/CarlosD1234/FuSaG5">FuSa </a> Valdivia
         </h1>
 
 {/*        <p className="description">
