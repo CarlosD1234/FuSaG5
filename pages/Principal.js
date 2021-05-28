@@ -11,7 +11,7 @@ export default function Principal() {
 
       <main>
         <h1 className="title">
-          Fusa Valdivia
+          FuSA Valdivia
         </h1>
 
 
