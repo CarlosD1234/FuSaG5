@@ -33,7 +33,7 @@ export default function Home() {
 */}
         <div className="grid">
           <a href="/Principal" className="card">
-            <h3>Iniciar &rarr;</h3>
+            <h3>Subir &rarr;</h3>
             <p>Sube tu archivo .wav</p>
           </a>
 
