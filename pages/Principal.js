@@ -1,4 +1,7 @@
 import Head from 'next/head'
+import Link from "next/link";
+import Image from "next/image";
+import * as React from "react"
 
 export default function Principal() {
     
@@ -15,12 +18,9 @@ export default function Principal() {
         </h1>
 
 
-        <body>
-            <form action="/subida" method="POST" enctype="multipart/form-data">
-                <input type="file" name="Audio" />
-                <button type="submit">Submit</button>
-            </form>
-        </body>
+        <a href="/Subidas" className="card">
+            <h3>Subir Audio &rarr;</h3>
+        </a>
 
       </main>
       <style jsx>{`
@@ -57,7 +57,25 @@ export default function Principal() {
           line-height: 5.00;
           font-size: 2rem;
         }
+        .card {
+          margin: 1rem;
+          flex-basis: 45%;
+          padding: 1.5rem;
+          text-align: left;
+          color: inherit;
+          text-decoration: none;
+          border: 5px solid #eaeaea;
+          border-radius: 20px;
+          transition: color 0.15s ease, border-color 0.15s ease;
+        }
+        .card:hover,
+        .card:focus,
+        .card:active {
+          color: #0070f3;
+          border-color: #0070f3;
+        }
         
+
       `}</style>
 
       <style jsx global>{`
