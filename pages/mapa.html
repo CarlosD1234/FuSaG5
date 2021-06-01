@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+		<meta charset="utf-8" />
+    <title>Mapa Valdivia</title>
+
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+		integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+		crossorigin=""/>
+		<!-- Make sure you put this AFTER Leaflet's CSS -->
+		<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+		integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+		crossorigin=""></script>
+
+		<style type="text/css">
+			#map {
+			  height: 600px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1 align="center">Mapa de Valdivia</h1>
+		<p align="center">
+				Valdivia es una comuna y ciudad de Chile, capital de la provincia homónima y de la Región de Los Ríos. Se encuentra a 847,6 km al sur de Santiago, la capital de Chile.
+				Está emplazada en la confluencia de los ríos Calle-Calle, Cau-cau y el río Cruces, y se encuentra a 15 km de la bahía de Corral. Según el censo nacional realizado en 2017 por el Instituto Nacional de Estadísticas de Chile, Valdivia tiene una población de 166 080 habitantes.<a href="https://es.wikipedia.org/wiki/Valdivia">[1]</a>
+		</p>
+
+		<div id="map"></div>
+
+		<script>
+			
+			var map = L.map('map').setView([-39.8308, -73.2400], 13);
+
+			L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+			  attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+			}).addTo(map);
+
+			L.marker([-39.8308, -73.2400]).addTo(map)
+			 .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+			 .openPopup();
+		</script>
+	</body>
+</html>
