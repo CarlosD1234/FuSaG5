@@ -42,7 +42,7 @@ export default function Home() {
             <p>Tutorial de como subir tu archivo .wav en FuSA</p>
           </a>
           
-          <a href="https://carlosd1234.github.io/FuSaG5Datos/" className="card"> {/*Recordatorio: Crear archivo local*/}
+          <a href="/Map" className="card">
             <h3>Mapa&rarr;</h3>
             <p>Ver el mapa de Valdivia</p>
           </a>
