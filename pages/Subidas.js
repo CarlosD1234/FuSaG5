@@ -37,23 +37,42 @@ export default function PrivatePage(props) {
         <a className="card">
           <h3>Nombre del Audio:</h3>
         </a>
-        
+        <input 
+          type="nomAudio"
+          placeholder="nombre audio"
+        />
+
         <a className="card">
           <h3>Latitud:</h3>
         </a>
-        
+        <input 
+          type="lat"
+          placeholder="latitud"
+        />
+
         <a className="card">
           <h3>Longitud:</h3>
         </a>
-        
+        <input 
+          type="lon"
+          placeholder="longitud"
+        />
+
         <a className="card">
           <h3>Fecha de grabación DD/MM/YYYY</h3>
         </a>
+        <input 
+          type="fecha"
+          placeholder="DD/MM/YYYY"
+        />
 
         <a className="card">
           <h3>Descripción</h3>
         </a>
-
+        <input 
+          type="descr"
+          placeholder="El audio trata sobre.."
+        />
 
 
         <h4>Subida de Audio</h4>
@@ -65,12 +84,6 @@ export default function PrivatePage(props) {
         >Subir</button>
         
       </main>
-
-
-
-
-
-
 
       <style jsx>{`
         .container {
