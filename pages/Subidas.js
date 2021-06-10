@@ -1,4 +1,5 @@
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import Head from 'next/head'
 import * as React from "react"
 
@@ -12,6 +13,10 @@ export default function PrivatePage(props) {
       setImage(i);
     }
   };
+
+  const MapWithNoSSR = dynamic(() => import("../components/DatosM"), {
+    ssr: false
+  })
 
   const uploadToServer = async (event) => {
     const body = new FormData();
@@ -43,20 +48,20 @@ export default function PrivatePage(props) {
         />
 
         <a className="card">
-          <h3>Latitud:</h3>
+          <h3>Latitud y longitud:</h3>
         </a>
         <input 
           type="lat"
           placeholder="latitud"
         />
 
-        <a className="card">
+        {/*<a className="card">
           <h3>Longitud:</h3>
         </a>
         <input 
           type="lon"
           placeholder="longitud"
-        />
+        />*/}
 
         <a className="card">
           <h3>Fecha de grabación DD/MM/YYYY</h3>
@@ -67,13 +72,21 @@ export default function PrivatePage(props) {
         />
 
         <a className="card">
+          <h3>Fuentes Sonoras presentes</h3>
+        </a>
+        <input 
+          type="fecha"
+          placeholder="Indicar fuentes sonoras"
+        />
+
+        <a className="card">
           <h3>Descripción</h3>
         </a>
         <input 
           type="descr"
           placeholder="El audio trata sobre.."
         />
-
+        
 
         <h4>Subida de Audio</h4>
         <input type="file" name="myImage" onChange={uploadToClient} />
@@ -82,6 +95,10 @@ export default function PrivatePage(props) {
           type="submit"
           onClick={uploadToServer}
         >Subir</button>
+
+        <div id="map">
+          <MapWithNoSSR />
+        </div>
         
       </main>
 
