@@ -33,79 +33,82 @@ export default function PrivatePage(props) {
         <title>Formulario de Audio</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+      <h1 className="title">
+            Información del Audio
+          </h1>
       <main>
-        <h1 className="title">
-          Información del Audio
-        </h1>
+        <div id="map" className="Mapa">
+          
+        <a>
+            <h3>Valdivia</h3>
+          </a>
+          <MapWithNoSSR />
+        </div>
 
-        <a className="card">
-          <h3>Nombre del Audio:</h3>
-        </a>
-        <input 
-          type="nomAudio"
-          placeholder="nombre audio"
-        />
+        <div className="Formulario">
+          
 
-        <a className="card">
-          <h3>Latitud y longitud:</h3>
-        </a>
-        <input 
-          type="lat"
-          placeholder="latitud"
-        />
+          <a className="card">
+            <h3>Nombre del Audio:</h3>
+          </a>
+          <input 
+            type="nomAudio"
+            placeholder="nombre audio"
+          />
 
-        {/*<a className="card">
-          <h3>Longitud:</h3>
-        </a>
-        <input 
-          type="lon"
-          placeholder="longitud"
-        />*/}
+          <a className="card">
+            <h3>Latitud y longitud:</h3>
+          </a>
+          <input 
+            type="lat"
+            placeholder="latitud"
+          />
+          <input 
+            type="lon"
+            placeholder="longitud"
+          />
 
-        <a className="card">
-          <h3>Fecha de grabación DD/MM/YYYY</h3>
-        </a>
-        <input 
-          type="fecha"
-          placeholder="DD/MM/YYYY"
-        />
+          <a className="card">
+            <h3>Fecha de grabación DD/MM/YYYY</h3>
+          </a>
+          <input 
+            type="fecha"
+            placeholder="DD/MM/YYYY"
+          />
 
-        <a className="card">
-          <h3>Fuentes Sonoras presentes</h3>
-        </a>
-        <input 
-          type="fecha"
-          placeholder="Indicar fuentes sonoras"
-        />
+          <a className="card">
+            <h3>Fuentes Sonoras presentes</h3>
+          </a>
+          <input 
+            type="fecha"
+            placeholder="Indicar fuentes sonoras"
+          />
 
-        <a className="card">
-          <h3>Descripción</h3>
-        </a>
-        <input 
-          type="descr"
-          placeholder="El audio trata sobre.."
-        />
+          <a className="card">
+            <h3>Descripción</h3>
+          </a>
+          <input 
+            type="descr"
+            placeholder="El audio trata sobre.."
+          />
+          
+
+          
+
+        </div>
         
 
-        <h4>Subida de Audio</h4>
+      </main>
+      <h4>Subida de Audio</h4>
         <input type="file" name="myImage" onChange={uploadToClient} />
         <button
           className="btn btn-primary"
           type="submit"
           onClick={uploadToServer}
         >Subir</button>
-
-        <div id="map">
-          <MapWithNoSSR />
-        </div>
-        
-      </main>
-
+      
       <style jsx>{`
         .container {
-          min-height: 100vh;
-          padding: 0 0.5rem;
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -113,13 +116,34 @@ export default function PrivatePage(props) {
         }
 
         main {
+          flex: 1;
+          display: flex;
+          justify-content: center;
+          align-items: left;
+          border: 5px solid #eaeaea;
+          width: 1250px;
+          max-height: 940px;
+        }
+        
+        .Formulario{
           padding: 5rem 0;
           flex: 1;
           display: flex;
           flex-direction: column;
           justify-content: center;
           align-items: left;
+          border: 5px solid #eaeaea;
         }
+        .Mapa {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          width: 700px;
+          height: 1000px;
+          max-height: 5000px;
+        }
+
         .title a:hover,
         .title a:focus,
         .title a:active {
@@ -127,11 +151,10 @@ export default function PrivatePage(props) {
         }
 
         .title {
-          margin: 0;
           line-height: 3;
-          width: 150%;
+          width: 100%;
           font-size: 2rem;
-          border: 5px solid #eaeaea;
+          border: 4px solid #eaeaea;
           border-radius: 1px;
         }
 
@@ -147,16 +170,6 @@ export default function PrivatePage(props) {
           font-size: 1.1rem;
           font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
             DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
-
-        .grid {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-
-          max-width: 800px;
-          margin-top: 3rem;
         }
 
         .card {
@@ -178,13 +191,6 @@ export default function PrivatePage(props) {
           margin: 0;
           font-size: 1.25rem;
           line-height: 1.5;
-        }
-
-        @media (max-width: 600px) {
-          .grid {
-            width: 100%;
-            flex-direction: column;
-          }
         }
       `}</style>
 
