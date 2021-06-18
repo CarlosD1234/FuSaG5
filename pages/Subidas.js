@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import * as React from "react";
 
+
 const MapWithNoSSR = dynamic(() => import("../components/DatosM").then((v) => v.Map), {
   ssr: false,
 });
@@ -44,6 +45,11 @@ export default function PrivatePage(props) {
     });
   };
 
+  function Coordenadas(event) {
+    console.log(event.latlng);
+  }
+  
+
   return (
     <div className="container">
       <Head>
@@ -71,7 +77,7 @@ export default function PrivatePage(props) {
             Valdivia
           </Heading>
 
-          <MapWithNoSSR />
+          <MapWithNoSSR onClick={ Coordenadas }/>
         </Flex>
 
         <Stack
