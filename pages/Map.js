@@ -1,15 +1,14 @@
 import React from "react";
 import dynamic from "next/dynamic";
-import Head from 'next/head'
+import Head from "next/head";
+
+const MapWithNoSSR = dynamic(() => import("../components/DatosM").then((v) => v.Map), {
+  ssr: false,
+});
 
 export default function Home() {
-  const MapWithNoSSR = dynamic(() => import("../components/DatosM"), {
-    ssr: false
-  });
-
   return (
     <div className="container">
-
       <Head>
         <title>Valdivia</title>
       </Head>
@@ -19,9 +18,6 @@ export default function Home() {
           <MapWithNoSSR />
         </div>
       </main>
-
-
     </div>
-
   );
 }

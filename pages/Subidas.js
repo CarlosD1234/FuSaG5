@@ -1,7 +1,29 @@
 import { useState } from "react";
+import { Box, Flex, Heading, Stack, Input } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
-import Head from 'next/head'
-import * as React from "react"
+import Head from "next/head";
+import * as React from "react";
+
+
+const MapWithNoSSR = dynamic(() => import("../components/DatosM").then((v) => v.Map), {
+  ssr: false,
+});
+
+const Card = ({ children }) => {
+  return (
+    <Box
+      margin="1em"
+      flexBasis="45%"
+      padding="1.5rem"
+      textAlign="left"
+      color="inherit"
+      textDecoration="none"
+      transition="color 0.15s ease, border-color 0.15s ease"
+    >
+      {children}
+    </Box>
+  );
+};
 
 export default function PrivatePage(props) {
   const [image, setImage] = useState(null);
@@ -14,99 +36,101 @@ export default function PrivatePage(props) {
     }
   };
 
-  const MapWithNoSSR = dynamic(() => import("../components/DatosM"), {
-    ssr: false
-  })
-
   const uploadToServer = async (event) => {
     const body = new FormData();
     body.append("file", image);
     const response = await fetch("/api/file", {
       method: "POST",
-      body
+      body,
     });
   };
 
+  function Coordenadas(event) {
+    console.log(event.latlng);
+  }
+  
+
   return (
     <div className="container">
-       <Head>
+      <Head>
         <title>Formulario de Audio</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1 className="title">
-            Información del Audio
-          </h1>
-      <main>
-        <div id="map" className="Mapa">
-          
-        <a>
-            <h3>Valdivia</h3>
-          </a>
-          <MapWithNoSSR />
-        </div>
+      <h1 className="title">Información del Audio</h1>
+      <Box
+        as="main"
+        display="flex"
+        justifyContent="center"
+        alignItems="left"
+        border="5px solid #eaeaea"
+        width="1250px"
+        maxHeight="940px"
+      >
+        <Flex
+          flexDirection="column"
+          justifyContent="center"
+          width="700px"
+          height="1000px"
+          maxHeight="5000px"
+        >
+          <Heading as="h3" fontSize="1.5em" marginLeft="0.5em">
+            Valdivia
+          </Heading>
 
-        <div className="Formulario">
-          
+          <MapWithNoSSR onClick={ Coordenadas }/>
+        </Flex>
 
-          <a className="card">
-            <h3>Nombre del Audio:</h3>
-          </a>
-          <input 
-            type="nomAudio"
-            placeholder="nombre audio"
-          />
+        <Stack
+          flex="1"
+          padding="5rem 0"
+          justifyContent="center"
+          alignItems="left"
+          border="5px solid #eaeaea"
+          spacing="0.3em"
+        >
+          <Card>
+            <Heading as="h3" fontSize="1.5em">
+              Nombre del Audio:
+            </Heading>
+          </Card>
+          <Input type="nomAudio" placeholder="nombre audio" />
 
-          <a className="card">
-            <h3>Latitud y longitud:</h3>
-          </a>
-          <input 
-            type="lat"
-            placeholder="latitud"
-          />
-          <input 
-            type="lon"
-            placeholder="longitud"
-          />
+          <Card>
+            <Heading as="h3" fontSize="1.5em">
+              Latitud y longitud:
+            </Heading>
+          </Card>
+          <Input type="lat" placeholder="latitud" />
+          <Input type="lon" placeholder="longitud" />
 
-          <a className="card">
-            <h3>Fecha de grabación DD/MM/YYYY</h3>
-          </a>
-          <input 
-            type="fecha"
-            placeholder="DD/MM/YYYY"
-          />
+          <Card>
+            <Heading as="h3" fontSize="1.5em">
+              Fecha de grabación DD/MM/YYYY
+            </Heading>
+          </Card>
+          <Input type="fecha" placeholder="DD/MM/YYYY" />
 
-          <a className="card">
-            <h3>Fuentes Sonoras presentes</h3>
-          </a>
-          <input 
-            type="fecha"
-            placeholder="Indicar fuentes sonoras"
-          />
+          <Card>
+            <Heading as="h3" fontSize="1.5em">
+              Fuentes Sonoras presentes
+            </Heading>
+          </Card>
+          <Input type="fecha" placeholder="Indicar fuentes sonoras" />
 
-          <a className="card">
-            <h3>Descripción</h3>
-          </a>
-          <input 
-            type="descr"
-            placeholder="El audio trata sobre.."
-          />
-          
-
-          
-
-        </div>
-        
-
-      </main>
+          <Card>
+            <Heading as="h3" fontSize="1.5em">
+              Descripción
+            </Heading>
+          </Card>
+          <Input type="descr" placeholder="El audio trata sobre.." />
+        </Stack>
+      </Box>
       <h4>Subida de Audio</h4>
-        <input type="file" name="myImage" onChange={uploadToClient} />
-        <button
-          className="btn btn-primary"
-          type="submit"
-          onClick={uploadToServer}
-        >Subir</button>
-      
+      <Input type="file" name="myImage" onChange={uploadToClient} />
+      <button className="btn btn-primary" type="submit" onClick={uploadToServer}>
+        Subir
+      </button>
+
       <style jsx>{`
         .container {
           display: flex;
@@ -123,25 +147,6 @@ export default function PrivatePage(props) {
           border: 5px solid #eaeaea;
           width: 1250px;
           max-height: 940px;
-        }
-        
-        .Formulario{
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: left;
-          border: 5px solid #eaeaea;
-        }
-        .Mapa {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          width: 700px;
-          height: 1000px;
-          max-height: 5000px;
         }
 
         .title a:hover,
@@ -168,8 +173,8 @@ export default function PrivatePage(props) {
           border-radius: 5px;
           padding: 0.75rem;
           font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+          font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+            Bitstream Vera Sans Mono, Courier New, monospace;
         }
 
         .card {
@@ -199,16 +204,14 @@ export default function PrivatePage(props) {
         body {
           padding: 0;
           margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
+          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
+            Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
         }
 
         * {
           box-sizing: border-box;
         }
       `}</style>
-
     </div>
   );
 }
