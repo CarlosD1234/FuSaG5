@@ -48,7 +48,6 @@ export default function PrivatePage(props) {
   function Coordenadas(event) {
     console.log(event.latlng);
   }
-  
 
   return (
     <div className="container">
