@@ -47,9 +47,19 @@ export default function PrivatePage(props) {
 
   function Coordenadas(event) {
     setPosition(event.latlng);
+    console.log(Respuestas.latitud);
   }
 
   const [position, setPosition] = useState({lat:-39.8139, lng: -73.2458})
+
+  const Respuestas = {
+    AudioNom: String,
+    latitud: position.lat,
+    longitud: position.lng,
+    FechaGrabacion: String,
+    FuentesSonoras: String,
+    Descripcion: String
+  }
 
   return (
     <div className="container">
