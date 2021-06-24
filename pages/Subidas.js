@@ -46,8 +46,10 @@ export default function PrivatePage(props) {
   };
 
   function Coordenadas(event) {
-    console.log(event.latlng);
+    setPosition(event.latlng);
   }
+
+  const [position, setPosition] = useState({lat:-39.8139, lng: -73.2458})
 
   return (
     <div className="container">
@@ -96,12 +98,10 @@ export default function PrivatePage(props) {
 
           <Card>
             <Heading as="h3" fontSize="1.5em">
-              Latitud y longitud:
+              Latitud: {position.lat}<br />longitud: {position.lng}
             </Heading>
           </Card>
-          <Input type="lat" placeholder="latitud" />
-          <Input type="lon" placeholder="longitud" />
-
+          
           <Card>
             <Heading as="h3" fontSize="1.5em">
               Fecha de grabación DD/MM/YYYY
@@ -124,6 +124,7 @@ export default function PrivatePage(props) {
           <Input type="descr" placeholder="El audio trata sobre.." />
         </Stack>
       </Box>
+      
       <h4>Subida de Audio</h4>
       <Input type="file" name="myImage" onChange={uploadToClient} />
       <button className="btn btn-primary" type="submit" onClick={uploadToServer}>
