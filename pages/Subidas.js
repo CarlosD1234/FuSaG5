@@ -4,7 +4,6 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import * as React from "react";
 
-
 const MapWithNoSSR = dynamic(() => import("../components/DatosM").then((v) => v.Map), {
   ssr: false,
 });
@@ -40,16 +39,14 @@ export default function PrivatePage(props) {
     const body = new FormData();
     body.append("file", image);
     Respuestas.ArchivoNom = image.name;
-    console.log(Respuestas.ArchivoNom);
     const response = await fetch("/api/file", {
       method: "POST",
-      body,
+      body
     });
   };
 
   function Coordenadas(event) {
     setPosition(event.latlng);
-    console.log(Respuestas.latitud);
   }
 
   const [position, setPosition] = useState({lat:-39.8139, lng: -73.2458})
