@@ -39,6 +39,8 @@ export default function PrivatePage(props) {
   const uploadToServer = async (event) => {
     const body = new FormData();
     body.append("file", image);
+    Respuestas.ArchivoNom = image.name;
+    console.log(Respuestas.ArchivoNom);
     const response = await fetch("/api/file", {
       method: "POST",
       body,
@@ -52,13 +54,31 @@ export default function PrivatePage(props) {
 
   const [position, setPosition] = useState({lat:-39.8139, lng: -73.2458})
 
+  const ValorNom = (event) => {
+    Respuestas.AudioNom = event.target.value;
+    console.log(Respuestas.AudioNom);
+  }
+
+  const ValorFecha = (event) => {
+    Respuestas.FechaGrabacion = event.target.value;
+  }
+
+  const ValorFuentes = (event) => {
+    Respuestas.FuentesSonoras = event.target.value;
+  }
+
+  const ValorDesc = (event) => {
+    Respuestas.Descripcion = event.target.value;
+  }
+
   const Respuestas = {
     AudioNom: String,
     latitud: position.lat,
     longitud: position.lng,
     FechaGrabacion: String,
     FuentesSonoras: String,
-    Descripcion: String
+    Descripcion: String,
+    ArchivoNom: String
   }
 
   return (
@@ -104,7 +124,7 @@ export default function PrivatePage(props) {
               Nombre del Audio:
             </Heading>
           </Card>
-          <Input type="nomAudio" placeholder="nombre audio" />
+          <Input type="nomAudio" placeholder="nombre audio" onChange = { ValorNom }/>
 
           <Card>
             <Heading as="h3" fontSize="1.5em">
@@ -117,21 +137,21 @@ export default function PrivatePage(props) {
               Fecha de grabación DD/MM/YYYY
             </Heading>
           </Card>
-          <Input type="fecha" placeholder="DD/MM/YYYY" />
+          <Input type="fecha" placeholder="DD/MM/YYYY" onChange = { ValorFecha }/>
 
           <Card>
             <Heading as="h3" fontSize="1.5em">
               Fuentes Sonoras presentes
             </Heading>
           </Card>
-          <Input type="fecha" placeholder="Indicar fuentes sonoras" />
+          <Input type="fecha" placeholder="Indicar fuentes sonoras" onChange = { ValorFuentes }/>
 
           <Card>
             <Heading as="h3" fontSize="1.5em">
               Descripción
             </Heading>
           </Card>
-          <Input type="descr" placeholder="El audio trata sobre.." />
+          <Input type="descr" placeholder="El audio trata sobre.." onChange = { ValorDesc }/>
         </Stack>
       </Box>
       
