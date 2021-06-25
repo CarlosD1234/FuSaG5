@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Flex, Heading, Stack, Input } from "@chakra-ui/react";
+import { Box, Flex, Heading, Stack, Input, Button, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import * as React from "react";
@@ -77,14 +77,16 @@ export default function PrivatePage(props) {
     Descripcion: String,
     ArchivoNom: String
   }
-
+  const {toggleColorMode} = useColorMode()
   return (
     <div className="container">
       <Head>
         <title>Formulario de Audio</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1 className="title">Información del Audio</h1>
+      <h1 className="title">Información del Audio       
+      <Button onClick={toggleColorMode}>Tema</Button>
+      </h1>
       <Box
         as="main"
         display="flex"
@@ -157,7 +159,6 @@ export default function PrivatePage(props) {
       <button className="btn btn-primary" type="submit" onClick={uploadToServer}>
         Subir
       </button>
-
       <style jsx>{`
         .container {
           display: flex;
