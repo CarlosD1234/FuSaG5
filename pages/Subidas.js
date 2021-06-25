@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { Box, Flex, Heading, Stack, Input } from "@chakra-ui/react";
+import { Box, Flex, Heading, Stack, Input, Button, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import * as React from "react";
-
 
 const MapWithNoSSR = dynamic(() => import("../components/DatosM").then((v) => v.Map), {
   ssr: false,
@@ -39,24 +38,55 @@ export default function PrivatePage(props) {
   const uploadToServer = async (event) => {
     const body = new FormData();
     body.append("file", image);
+    Respuestas.ArchivoNom = image.name;
     const response = await fetch("/api/file", {
       method: "POST",
-      body,
+      body
     });
   };
 
   function Coordenadas(event) {
-    console.log(event.latlng);
+    setPosition(event.latlng);
   }
-  
 
+  const [position, setPosition] = useState({lat:-39.8139, lng: -73.2458})
+
+  const ValorNom = (event) => {
+    Respuestas.AudioNom = event.target.value;
+    console.log(Respuestas.AudioNom);
+  }
+
+  const ValorFecha = (event) => {
+    Respuestas.FechaGrabacion = event.target.value;
+  }
+
+  const ValorFuentes = (event) => {
+    Respuestas.FuentesSonoras = event.target.value;
+  }
+
+  const ValorDesc = (event) => {
+    Respuestas.Descripcion = event.target.value;
+  }
+
+  const Respuestas = {
+    AudioNom: String,
+    latitud: position.lat,
+    longitud: position.lng,
+    FechaGrabacion: String,
+    FuentesSonoras: String,
+    Descripcion: String,
+    ArchivoNom: String
+  }
+  const {toggleColorMode} = useColorMode()
   return (
     <div className="container">
       <Head>
         <title>Formulario de Audio</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1 className="title">Información del Audio</h1>
+      <h1 className="title">Información del Audio       
+      <Button onClick={toggleColorMode}>Tema</Button>
+      </h1>
       <Box
         as="main"
         display="flex"
@@ -93,44 +123,42 @@ export default function PrivatePage(props) {
               Nombre del Audio:
             </Heading>
           </Card>
-          <Input type="nomAudio" placeholder="nombre audio" />
+          <Input type="nomAudio" placeholder="nombre audio" onChange = { ValorNom }/>
 
           <Card>
             <Heading as="h3" fontSize="1.5em">
-              Latitud y longitud:
+              Latitud: {position.lat}<br />longitud: {position.lng}
             </Heading>
           </Card>
-          <Input type="lat" placeholder="latitud" />
-          <Input type="lon" placeholder="longitud" />
-
+          
           <Card>
             <Heading as="h3" fontSize="1.5em">
               Fecha de grabación DD/MM/YYYY
             </Heading>
           </Card>
-          <Input type="fecha" placeholder="DD/MM/YYYY" />
+          <Input type="fecha" placeholder="DD/MM/YYYY" onChange = { ValorFecha }/>
 
           <Card>
             <Heading as="h3" fontSize="1.5em">
               Fuentes Sonoras presentes
             </Heading>
           </Card>
-          <Input type="fecha" placeholder="Indicar fuentes sonoras" />
+          <Input type="fecha" placeholder="Indicar fuentes sonoras" onChange = { ValorFuentes }/>
 
           <Card>
             <Heading as="h3" fontSize="1.5em">
               Descripción
             </Heading>
           </Card>
-          <Input type="descr" placeholder="El audio trata sobre.." />
+          <Input type="descr" placeholder="El audio trata sobre.." onChange = { ValorDesc }/>
         </Stack>
       </Box>
+      
       <h4>Subida de Audio</h4>
       <Input type="file" name="myImage" onChange={uploadToClient} />
       <button className="btn btn-primary" type="submit" onClick={uploadToServer}>
         Subir
       </button>
-
       <style jsx>{`
         .container {
           display: flex;
