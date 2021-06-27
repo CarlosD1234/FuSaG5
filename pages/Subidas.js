@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Box, Flex, Heading, Stack, Input, Button, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import * as React from "react";
+import axios from "axios";
 
 const MapWithNoSSR = dynamic(() => import("../components/DatosM").then((v) => v.Map), {
   ssr: false,
@@ -27,12 +28,14 @@ const Card = ({ children }) => {
 export default function PrivatePage(props) {
   const [image, setImage] = useState(null);
   const [createObjectURL] = useState(null);
+  const [data, setData] = useState();
 
   const uploadToClient = (event) => {
     if (event.target.files && event.target.files[0]) {
       const i = event.target.files[0];
       setImage(i);
     }
+    console.log(Respuestas.AudioNom);
   };
 
   const uploadToServer = async (event) => {
@@ -43,6 +46,7 @@ export default function PrivatePage(props) {
       method: "POST",
       body
     });
+    subirRespuestas(setData);
   };
 
   function Coordenadas(event) {
@@ -50,6 +54,28 @@ export default function PrivatePage(props) {
   }
 
   const [position, setPosition] = useState({lat:-39.8139, lng: -73.2458})
+
+  async function subirRespuestas(setData) {
+  
+    try {
+      const response = await axios.post("/api/Textos", {
+        name: `./Audios/${Respuestas.ArchivoNom}.txt`,
+        data: 
+        Respuestas.AudioNom       + "\n" + 
+        Respuestas.latitud        + "\n" + 
+        Respuestas.longitud       + "\n" + 
+        Respuestas.FechaGrabacion + "\n" + 
+        Respuestas.HoraGrabacion  + "\n" + 
+        Respuestas.FuentesSonoras + "\n" + 
+        Respuestas.Descripcion    + "\n" + 
+        Respuestas.ArchivoNom
+      });
+  
+      setData(response.data);
+    } catch (err) {
+      setData(err.message);
+    }
+  }
 
   const ValorNom = (event) => {
     Respuestas.AudioNom = event.target.value;
@@ -68,14 +94,19 @@ export default function PrivatePage(props) {
     Respuestas.Descripcion = event.target.value;
   }
 
+  const ValorHora = (event) => {
+    Respuestas.HoraGrabacion = event.target.value;
+  }
+
   const Respuestas = {
     AudioNom: String,
     latitud: position.lat,
     longitud: position.lng,
     FechaGrabacion: String,
+    HoraGrabacion: String,
     FuentesSonoras: String,
     Descripcion: String,
-    ArchivoNom: String
+    ArchivoNom: String,
   }
   const {toggleColorMode} = useColorMode()
   return (
@@ -87,6 +118,10 @@ export default function PrivatePage(props) {
       <h1 className="title">Información del Audio       
       <Button onClick={toggleColorMode}>Tema</Button>
       </h1>
+      
+      <h4>Subida de Audio</h4>
+      <Input type="file" name="myImage" onChange={uploadToClient} />
+
       <Box
         as="main"
         display="flex"
@@ -140,10 +175,17 @@ export default function PrivatePage(props) {
 
           <Card>
             <Heading as="h3" fontSize="1.5em">
+              Hora de grabación
+            </Heading>
+          </Card>
+          <Input type="Hora" placeholder="00:00:00" onChange = { ValorHora }/>
+
+          <Card>
+            <Heading as="h3" fontSize="1.5em">
               Fuentes Sonoras presentes
             </Heading>
           </Card>
-          <Input type="fecha" placeholder="Indicar fuentes sonoras" onChange = { ValorFuentes }/>
+          <Input type="fuentes" placeholder="Indicar fuentes sonoras" onChange = { ValorFuentes }/>
 
           <Card>
             <Heading as="h3" fontSize="1.5em">
@@ -154,8 +196,7 @@ export default function PrivatePage(props) {
         </Stack>
       </Box>
       
-      <h4>Subida de Audio</h4>
-      <Input type="file" name="myImage" onChange={uploadToClient} />
+      
       <button className="btn btn-primary" type="submit" onClick={uploadToServer}>
         Subir
       </button>
