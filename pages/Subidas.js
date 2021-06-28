@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import * as React from "react";
 import axios from "axios";
+import Input1 from './componentes/Input1';
 
 const MapWithNoSSR = dynamic(() => import("../components/DatosM").then((v) => v.Map), {
   ssr: false,
@@ -14,7 +15,7 @@ const Card = ({ children }) => {
     <Box
       margin="1em"
       flexBasis="45%"
-      padding="1.5rem"
+      padding="0.5rem"
       textAlign="left"
       color="inherit"
       textDecoration="none"
@@ -35,13 +36,13 @@ export default function PrivatePage(props) {
       const i = event.target.files[0];
       setImage(i);
     }
-    console.log(Respuestas.AudioNom);
+    console.log(nomAudio.campo);
   };
 
   const uploadToServer = async (event) => {
     const body = new FormData();
     body.append("file", image);
-    Respuestas.ArchivoNom = image.name;
+    archivoNom.campo = image.name;
     const response = await fetch("/api/file", {
       method: "POST",
       body
@@ -59,16 +60,16 @@ export default function PrivatePage(props) {
   
     try {
       const response = await axios.post("/api/Textos", {
-        name: `./Audios/${Respuestas.ArchivoNom}.txt`,
+        name: `./Audios/${nomAudio.campo}.txt`,
         data: 
-        Respuestas.AudioNom       + "\n" + 
-        Respuestas.latitud        + "\n" + 
-        Respuestas.longitud       + "\n" + 
-        Respuestas.FechaGrabacion + "\n" + 
-        Respuestas.HoraGrabacion  + "\n" + 
-        Respuestas.FuentesSonoras + "\n" + 
-        Respuestas.Descripcion    + "\n" + 
-        Respuestas.ArchivoNom
+        nomAudio.campo       + "\n" + 
+        position.lat        + "\n" + 
+        position.lng       + "\n" + 
+        fecha.campo + "\n" + 
+        hora.campo  + "\n" + 
+        fuenteSonora.campo + "\n" + 
+        descripcion.campo    + "\n" + 
+        archivoNom.campo
       });
   
       setData(response.data);
@@ -78,36 +79,50 @@ export default function PrivatePage(props) {
   }
 
   const ValorNom = (event) => {
-    Respuestas.AudioNom = event.target.value;
-    console.log(Respuestas.AudioNom);
+    nomAudio.campo = event.target.value;
+    console.log(nomAudio.campo);
   }
 
   const ValorFecha = (event) => {
-    Respuestas.FechaGrabacion = event.target.value;
+    fecha.campo = event.target.value;
   }
 
   const ValorFuentes = (event) => {
-    Respuestas.FuentesSonoras = event.target.value;
+    fuenteSonora.campo = event.target.value;
   }
 
   const ValorDesc = (event) => {
-    Respuestas.Descripcion = event.target.value;
+    descripcion.campo = event.target.value;
   }
 
   const ValorHora = (event) => {
-    Respuestas.HoraGrabacion = event.target.value;
+    hora.campo = event.target.value;
   }
 
-  const Respuestas = {
-    AudioNom: String,
-    latitud: position.lat,
-    longitud: position.lng,
-    FechaGrabacion: String,
-    HoraGrabacion: String,
-    FuentesSonoras: String,
-    Descripcion: String,
-    ArchivoNom: String,
-  }
+	const [nomAudio, cambiarNomAudio] = useState({campo: '', valido: null});
+	const [latT, cambiarLat] = useState({campo: '', valido: null});
+	const [lonN, cambiarLon] = useState({campo: '', valido: null});
+	const [fecha, cambiarFecha] = useState({campo: '', valido: null});
+  const [hora, cambiarHora] = useState({campo: '', valido: null});
+  const [fuenteSonora, cambiarFuenteSonora] = useState({campo: '', valido: null});
+	const [descripcion, cambiarDescripcion] = useState({campo: '', valido: null});
+	const [archivoNom, cambiarArchivoNom] = useState({campo: '', valido: null});
+	const [formularioValido, cambiarFormularioValido] = useState(null);
+
+	const expresiones = {
+		nomAudio: /^[a-zA-Z0-9_-]{4,12}$/, // Letras, numeros, guion y guion_bajo
+		fuenteSonora: /^[a-zA-ZÀ-ÿ,._\s]{4,16}$/, // Letras y espacios, pueden llevar acentos.
+		lat: /^[Z0-9.]{1,6}$/, // 1 a 5 digitos.
+		lon: /^[Z0-9.]{1,6}$/,
+		fecha: /^[Z0-9/'/']{10}$/, //DD/MM/YYYY
+    hora: /^[Z0-9/:]{8}$/,
+		descripcion: /^[a-zA-ZÀ-ÿ\s]{4,40}$/
+	}
+
+
+
+
+
   const {toggleColorMode} = useColorMode()
   return (
     <div className="container">
@@ -158,7 +173,17 @@ export default function PrivatePage(props) {
               Nombre del Audio:
             </Heading>
           </Card>
-          <Input type="nomAudio" placeholder="nombre audio" onChange = { ValorNom }/>
+          <Input1 
+					  estado={nomAudio}
+					  cambiarEstado={cambiarNomAudio}
+					  tipo="text"
+					  //label="Nombre del audio"
+					  placeholder="audio_1"
+					  name="nomAudio"
+					  leyendaError="Error, debe ingresar un nombre válido. Entre 4 y 12 caracteres."
+					  expresionRegular={expresiones.nomAudio}
+            onChange = { ValorNom }
+          />
 
           <Card>
             <Heading as="h3" fontSize="1.5em">
@@ -171,28 +196,69 @@ export default function PrivatePage(props) {
               Fecha de grabación DD/MM/YYYY
             </Heading>
           </Card>
-          <Input type="fecha" placeholder="DD/MM/YYYY" onChange = { ValorFecha }/>
+          <Input1 
+					  estado={fecha}
+					  cambiarEstado={cambiarFecha}
+					  tipo="text"
+					  //label="Fecha"
+					  placeholder="DD/MM/YYYY"
+					  name="fecha"
+					  leyendaError="Debe tener forma DD/MM/YYYY."
+					  expresionRegular={expresiones.fecha}
+            onChange = { ValorFecha }
+          />
 
           <Card>
             <Heading as="h3" fontSize="1.5em">
               Hora de grabación
             </Heading>
           </Card>
-          <Input type="Hora" placeholder="00:00:00" onChange = { ValorHora }/>
+          <Input1 
+					  estado={hora}
+					  cambiarEstado={cambiarHora}
+					  tipo="text"
+					  //label="Hora"
+					  placeholder="00:00:00"
+					  name="hora"
+					  leyendaError="Debe tener forma 00:00:00."
+					  expresionRegular={expresiones.hora}
+            onChange = { ValorHora } 
+          />
 
           <Card>
             <Heading as="h3" fontSize="1.5em">
               Fuentes Sonoras presentes
             </Heading>
           </Card>
-          <Input type="fuentes" placeholder="Indicar fuentes sonoras" onChange = { ValorFuentes }/>
+          <Input1 
+					  estado={fuenteSonora}
+					  cambiarEstado={cambiarFuenteSonora}
+					  tipo="text"
+					  //label="Fuente sonora"
+					  placeholder="Autos"
+					  name="fuente_sonora"
+					  leyendaError="El formulario debe tener de 4 a 16 caracteres, además no se permiten números."
+					  expresionRegular={expresiones.fuenteSonora}
+
+            onChange = { ValorFuentes } valido={fuenteSonora.valido}
+
+          />
 
           <Card>
             <Heading as="h3" fontSize="1.5em">
               Descripción
             </Heading>
           </Card>
-          <Input type="descr" placeholder="El audio trata sobre.." onChange = { ValorDesc }/>
+          <Input1 
+					estado={descripcion}
+					cambiarEstado={cambiarDescripcion}
+					tipo="text"
+					//label="Descripcion"
+					placeholder="El audio trata sobre..."
+					name="descripcion"
+					leyendaError="Ingrese una sentencia mayor a 4 letras y menor a 40."
+					expresionRegular={expresiones.descripcion}
+            onChange = { ValorDesc }/>
         </Stack>
       </Box>
       
