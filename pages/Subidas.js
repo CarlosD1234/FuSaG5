@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import * as React from "react";
 import axios from "axios";
-import Input1 from './componentes/Input1';
+import ComponenteInput from '../components/Input1';
 
 const MapWithNoSSR = dynamic(() => import("../components/DatosM").then((v) => v.Map), {
   ssr: false,
@@ -135,7 +135,9 @@ export default function PrivatePage(props) {
       </h1>
       
       <h4>Subida de Audio</h4>
-      <Input type="file" name="myImage" onChange={uploadToClient} />
+        <div>
+          <Input type="file" name="myImage" onChange={uploadToClient} />
+        </div>
 
       <Box
         as="main"
@@ -173,7 +175,7 @@ export default function PrivatePage(props) {
               Nombre del Audio:
             </Heading>
           </Card>
-          <Input1 
+          <ComponenteInput 
 					  estado={nomAudio}
 					  cambiarEstado={cambiarNomAudio}
 					  tipo="text"
@@ -196,7 +198,7 @@ export default function PrivatePage(props) {
               Fecha de grabación DD/MM/YYYY
             </Heading>
           </Card>
-          <Input1 
+          <ComponenteInput 
 					  estado={fecha}
 					  cambiarEstado={cambiarFecha}
 					  tipo="text"
@@ -213,7 +215,7 @@ export default function PrivatePage(props) {
               Hora de grabación
             </Heading>
           </Card>
-          <Input1 
+          <ComponenteInput  
 					  estado={hora}
 					  cambiarEstado={cambiarHora}
 					  tipo="text"
@@ -230,7 +232,7 @@ export default function PrivatePage(props) {
               Fuentes Sonoras presentes
             </Heading>
           </Card>
-          <Input1 
+          <ComponenteInput  
 					  estado={fuenteSonora}
 					  cambiarEstado={cambiarFuenteSonora}
 					  tipo="text"
@@ -249,7 +251,7 @@ export default function PrivatePage(props) {
               Descripción
             </Heading>
           </Card>
-          <Input1 
+          <ComponenteInput  
 					estado={descripcion}
 					cambiarEstado={cambiarDescripcion}
 					tipo="text"

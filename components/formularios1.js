@@ -1,3 +1,4 @@
+import React from 'react';
 import styled, {css} from 'styled-components';
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -152,8 +153,8 @@ const MensajeError = styled.div`
 		margin-left: 10px;
 	}
 `;
-
-export {
+/*
+export const{
 	Formulario,
 	Label,
 	GrupoInput,
@@ -165,4 +166,15 @@ export {
 	Boton,
 	MensajeExito,
 	MensajeError
-};
+};*/
+
+export { Formulario };
+export { Label };
+export { GrupoInput };
+export { Input2 };
+export { LeyendaError };
+export { ContenedorTerminos };
+export { ContenedorBotonCentrado };
+export { Boton };
+export { MensajeExito };
+export { MensajeError };
