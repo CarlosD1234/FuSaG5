@@ -30,16 +30,6 @@ export default function Principal() {
         </a>
       </footer>
       <style jsx>{`
-        /*.container {
-          min-height: 10vh;
-          padding: 0 0.5rem;
-          flex: 1.1rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }*/
-
         main {
           flex: 1;
           flex-direction: column;

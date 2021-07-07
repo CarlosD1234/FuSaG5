@@ -268,6 +268,8 @@ export default function PrivatePage(props) {
       <button className="btn btn-primary" type="submit" onClick={uploadToServer}>
         Subir
       </button>
+
+
       <style jsx>{`
         .container {
           display: flex;
@@ -276,6 +278,12 @@ export default function PrivatePage(props) {
           align-items: center;
         }
 
+        .btn {
+          border: 8px solid #eaeaea;
+          width: 500px;
+          transition: color 0.15s ease, border-color 0.15s ease;
+          margin: 2rem;
+        }
         main {
           flex: 1;
           display: flex;

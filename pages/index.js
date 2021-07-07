@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Link from "next/link";
-import Image from "next/image";
 import * as React from "react"
 
 // 1. import `ChakraProvider` component
@@ -27,10 +26,6 @@ export default function Home() {
           <a href="https://github.com/CarlosD1234/FuSaG5">FuSa </a> Valdivia
         </h1>
 
-{/*        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
-*/}
         <div className="grid">
           <a href="/Principal" className="card">
             <h3>Subir &rarr;</h3>
@@ -40,11 +35,6 @@ export default function Home() {
           <a href="/Tutorial" className="card">
             <h3>Instrucciones &rarr;</h3>
             <p>Tutorial de como subir tu archivo .wav en FuSA</p>
-          </a>
-          
-          <a href="/Map" className="card">
-            <h3>Mapa&rarr;</h3>
-            <p>Ver el mapa de Valdivia</p>
           </a>
         </div>
       </main>
