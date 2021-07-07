@@ -11,7 +11,7 @@ const colores = {
 const Formulario = styled.form`
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	gap: 20px;
+	gap: 15px;
 
 	@media (max-width: 800px){
 		grid-template-columns: 1fr;
@@ -33,6 +33,7 @@ const Label = styled.label`
 const GrupoInput = styled.div`
 	position: relative;
 	z-index: 90;
+	padding: 15px;
 `;
 
 const Input2 = styled.input`
@@ -41,7 +42,7 @@ const Input2 = styled.input`
 	border-radius: 3px;
 	height: 45px;
 	line-height: 45px;
-	padding: 0 40px 0 10px;
+	padding: 0px 40px 0 10px;
 	transition: .3s ease all;
 	border: 3px solid transparent;
 
@@ -62,6 +63,7 @@ const Input2 = styled.input`
 
 const LeyendaError = styled.p`
 	font-size: 12px;
+	padding: 15px;
 	margin-bottom: 0;
 	color: ${colores.error};
 	display: none;
@@ -143,7 +145,7 @@ const MensajeError = styled.div`
 	height: 45px;
 	line-height: 45px;
 	background: #F66060;
-	padding: 0px 15px;
+	padding: 15px 15px;
 	border-radius: 3px;
 	grid-column: span 2;
 	p {
