@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import * as React from "react";
 import axios from "axios";
+import { Formulario, Label, GrupoInput, LeyendaError, IconoValidacion } from "../components/formularios1";
 import ComponenteInput from '../components/Input1';
 
 const MapWithNoSSR = dynamic(() => import("../components/DatosM").then((v) => v.Map), {
@@ -13,9 +14,9 @@ const MapWithNoSSR = dynamic(() => import("../components/DatosM").then((v) => v.
 const Card = ({ children }) => {
   return (
     <Box
-      margin="1em"
+      margin="0em"
       flexBasis="45%"
-      padding="0.5rem"
+      padding="1rem"
       textAlign="left"
       color="inherit"
       textDecoration="none"
@@ -164,10 +165,10 @@ export default function PrivatePage(props) {
 
         <Stack
           flex="1"
-          padding="5rem 0"
+          padding="0rem 0"
           justifyContent="center"
           alignItems="left"
-          border="5px solid #eaeaea"
+          border="0px solid #eaeaea"
           spacing="0.3em"
         >
           <Card>
@@ -176,20 +177,20 @@ export default function PrivatePage(props) {
             </Heading>
           </Card>
           <ComponenteInput 
-					  estado={nomAudio}
-					  cambiarEstado={cambiarNomAudio}
-					  tipo="text"
-					  //label="Nombre del audio"
-					  placeholder="audio_1"
-					  name="nomAudio"
-					  leyendaError="Error, debe ingresar un nombre válido. Entre 4 y 12 caracteres."
-					  expresionRegular={expresiones.nomAudio}
+            estado={nomAudio}
+            cambiarEstado={cambiarNomAudio}
+            tipo="text"
+            //label="Nombre del audio"
+            placeholder="audio_1"
+            name="nomAudio"
+            leyendaError="Error, debe ingresar un nombre válido. Entre 4 y 12 caracteres."
+            expresionRegular={expresiones.nomAudio}
             onChange = { ValorNom }
           />
 
           <Card>
             <Heading as="h3" fontSize="1.5em">
-              Latitud: {position.lat}<br />longitud: {position.lng}
+              Latitud: {position.lat}<br />Longitud: {position.lng}
             </Heading>
           </Card>
           
@@ -198,55 +199,54 @@ export default function PrivatePage(props) {
               Fecha de grabación DD/MM/YYYY
             </Heading>
           </Card>
-          <ComponenteInput 
-					  estado={fecha}
-					  cambiarEstado={cambiarFecha}
-					  tipo="text"
-					  //label="Fecha"
-					  placeholder="DD/MM/YYYY"
-					  name="fecha"
-					  leyendaError="Debe tener forma DD/MM/YYYY."
-					  expresionRegular={expresiones.fecha}
-            onChange = { ValorFecha }
-          />
+            <ComponenteInput 
+              estado={fecha}
+              cambiarEstado={cambiarFecha}
+              tipo="text"
+              //label="Fecha"
+              placeholder="DD/MM/YYYY"
+              name="fecha"
+              leyendaError="Debe tener forma DD/MM/YYYY."
+              expresionRegular={expresiones.fecha}
+              onChange = { ValorFecha }
+            />
 
           <Card>
             <Heading as="h3" fontSize="1.5em">
               Hora de grabación
             </Heading>
           </Card>
-          <ComponenteInput  
-					  estado={hora}
-					  cambiarEstado={cambiarHora}
-					  tipo="text"
-					  //label="Hora"
-					  placeholder="00:00:00"
-					  name="hora"
-					  leyendaError="Debe tener forma 00:00:00."
-					  expresionRegular={expresiones.hora}
-            onChange = { ValorHora } 
-          />
+            <ComponenteInput  
+              estado={hora}
+              cambiarEstado={cambiarHora}
+              tipo="text"
+              //label="Hora"
+              placeholder="00:00:00"
+              name="hora"
+              leyendaError="Debe tener forma 00:00:00."
+              expresionRegular={expresiones.hora}
+              onChange = { ValorHora } 
+            />
 
           <Card>
             <Heading as="h3" fontSize="1.5em">
               Fuentes Sonoras presentes
             </Heading>
+
           </Card>
-          <ComponenteInput  
-					  estado={fuenteSonora}
-					  cambiarEstado={cambiarFuenteSonora}
-					  tipo="text"
-					  //label="Fuente sonora"
-					  placeholder="Autos"
-					  name="fuente_sonora"
-					  leyendaError="El formulario debe tener de 4 a 16 caracteres, además no se permiten números."
-					  expresionRegular={expresiones.fuenteSonora}
-
-            onChange = { ValorFuentes } valido={fuenteSonora.valido}
-
-          />
-
+            <ComponenteInput  
+              estado={fuenteSonora}
+              cambiarEstado={cambiarFuenteSonora}
+              tipo="text"
+              //label="Fuente sonora"
+              placeholder="Autos"
+              name="fuente_sonora"
+              leyendaError="El formulario debe tener de 4 a 16 caracteres, además no se permiten números."
+              expresionRegular={expresiones.fuenteSonora}
+              onChange = { ValorFuentes } valido={fuenteSonora.valido}
+            />
           <Card>
+
             <Heading as="h3" fontSize="1.5em">
               Descripción
             </Heading>
