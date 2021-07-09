@@ -66,8 +66,8 @@ export default function PrivatePage(props) {
         nomAudio.campo       + "\n" + 
         position.lat        + "\n" + 
         position.lng       + "\n" + 
-        fecha.campo + "\n" + 
-        hora.campo  + "\n" + 
+        dia.campo + " / " + mes.campo + " / " + anio.campo + "\n" +
+        horas.campo + " / " + minutos.campo + " / " + segundos.campo + "\n" +
         fuenteSonora.campo + "\n" + 
         descripcion.campo    + "\n" + 
         archivoNom.campo
@@ -84,9 +84,28 @@ export default function PrivatePage(props) {
     console.log(nomAudio.campo);
   }
 
-  const ValorFecha = (event) => {
-    fecha.campo = event.target.value;
+//Fechas
+  const ValorDia = (event) => {
+    dia.campo = event.target.value;
   }
+
+  const ValorMes = (event) => {
+    mes.campo = event.target.value;
+  }
+
+  const ValorAnio = (event) => {
+    anio.campo = event.target.value;
+  }
+//Hora
+const ValorSegundos = (event) => {
+  segundos.campo = event.target.value;
+}
+const ValorMinutos = (event) => {
+  minutos.campo = event.target.value;
+}
+const ValorHoras = (event) => {
+  horas.campo = event.target.value;
+}
 
   const ValorFuentes = (event) => {
     fuenteSonora.campo = event.target.value;
@@ -96,18 +115,24 @@ export default function PrivatePage(props) {
     descripcion.campo = event.target.value;
   }
 
-  const ValorHora = (event) => {
-    hora.campo = event.target.value;
-  }
 
 	const [nomAudio, cambiarNomAudio] = useState({campo: '', valido: null});
+
 	const [latT, cambiarLat] = useState({campo: '', valido: null});
 	const [lonN, cambiarLon] = useState({campo: '', valido: null});
-	const [fecha, cambiarFecha] = useState({campo: '', valido: null});
-  const [hora, cambiarHora] = useState({campo: '', valido: null});
+
+  const [dia, cambiarDia] = useState({campo: '', valido: null});
+  const [mes, cambiarMes] = useState({campo: '', valido: null});
+  const [anio, cambiarAnio] = useState({campo: '', valido: null});
+
+  const [minutos, cambiarMinutos] = useState({campo: '', valido: null});
+  const [horas, cambiarHoras] = useState({campo: '', valido: null});
+  const [segundos, cambiarSegundos] = useState({campo: '', valido: null});
+
   const [fuenteSonora, cambiarFuenteSonora] = useState({campo: '', valido: null});
 	const [descripcion, cambiarDescripcion] = useState({campo: '', valido: null});
 	const [archivoNom, cambiarArchivoNom] = useState({campo: '', valido: null});
+
 	const [formularioValido, cambiarFormularioValido] = useState(null);
 
 	const expresiones = {
@@ -115,8 +140,15 @@ export default function PrivatePage(props) {
 		fuenteSonora: /^[a-zA-ZÀ-ÿ,._\s]{4,16}$/, // Letras y espacios, pueden llevar acentos.
 		lat: /^[Z0-9.]{1,6}$/, // 1 a 5 digitos.
 		lon: /^[Z0-9.]{1,6}$/,
-		fecha: /^[Z0-9/'/']{10}$/, //DD/MM/YYYY
-    hora: /^[Z0-9/:]{8}$/,
+
+		dia: /^[Z0-9/]{2}$/, //DD
+    mes: /^[Z0-9/]{2}$/, //MM
+    anio: /^[Z0-9/]{4}$/, //YYYY
+
+    minutos:/^[Z0-9/:]{2}$/,
+    horas:/^[Z0-9/:]{2}$/,
+    segundos:/^[Z0-9/:]{2}$/,
+
 		descripcion: /^[a-zA-ZÀ-ÿ\s]{4,40}$/
 	}
 
@@ -199,34 +231,91 @@ export default function PrivatePage(props) {
               Fecha de grabación DD/MM/YYYY
             </Heading>
           </Card>
+
+          <Flex>
             <ComponenteInput 
-              estado={fecha}
-              cambiarEstado={cambiarFecha}
+              estado={dia}
+              cambiarEstado={cambiarDia}
               tipo="text"
-              //label="Fecha"
-              placeholder="DD/MM/YYYY"
-              name="fecha"
-              leyendaError="Debe tener forma DD/MM/YYYY."
-              expresionRegular={expresiones.fecha}
-              onChange = { ValorFecha }
+              placeholder="DD"
+              name="dia"
+              leyendaError="Debe tener forma DD."
+              expresionRegular={expresiones.dia}
+              onChange = { ValorDia }
             />
+            <Heading width="20px">
+                / 
+            </Heading>
+            <ComponenteInput 
+              estado={mes}
+              cambiarEstado={cambiarMes}
+              tipo="text"
+              placeholder="MM"
+              name="mes"
+              leyendaError="Debe tener forma MM."
+              expresionRegular={expresiones.mes}
+              onChange = { ValorMes }
+            />
+            <Heading width="20px">
+                / 
+            </Heading>
+            <ComponenteInput 
+              estado={anio}
+              cambiarEstado={cambiarAnio}
+              tipo="text"
+              placeholder="YYYY"
+              name="anio"
+              leyendaError="Debe tener forma YYYY."
+              expresionRegular={expresiones.anio}
+              onChange = { ValorAnio }
+            />
+
+          </Flex>
 
           <Card>
             <Heading as="h3" fontSize="1.5em">
               Hora de grabación
             </Heading>
           </Card>
+
+          <Flex>
             <ComponenteInput  
-              estado={hora}
-              cambiarEstado={cambiarHora}
+              estado={horas}
+              cambiarEstado={cambiarHoras}
               tipo="text"
-              //label="Hora"
-              placeholder="00:00:00"
-              name="hora"
-              leyendaError="Debe tener forma 00:00:00."
-              expresionRegular={expresiones.hora}
-              onChange = { ValorHora } 
+              placeholder="00"
+              name="horas"
+              leyendaError="Debe tener forma 00."
+              expresionRegular={expresiones.horas}
+              onChange = { ValorHoras } 
             />
+            <Heading width="20px">
+                : 
+            </Heading>
+            <ComponenteInput  
+              estado={segundos}
+              cambiarEstado={cambiarMinutos}
+              tipo="text"
+              placeholder="00"
+              name="minutos"
+              leyendaError="Debe tener forma 00."
+              expresionRegular={expresiones.minutos}
+              onChange = { ValorMinutos } 
+            />
+            <Heading width="20px">
+                : 
+            </Heading>
+            <ComponenteInput  
+              estado={segundos}
+              cambiarEstado={cambiarSegundos}
+              tipo="text"
+              placeholder="00"
+              name="segundos"
+              leyendaError="Debe tener forma 00."
+              expresionRegular={expresiones.segundos}
+              onChange = { ValorSegundos } 
+            />
+          </Flex>
 
           <Card>
             <Heading as="h3" fontSize="1.5em">
