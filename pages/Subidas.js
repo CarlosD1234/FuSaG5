@@ -5,7 +5,10 @@ import Head from "next/head";
 import Select from 'react-select'
 import axios from "axios";
 import ComponenteInput from '../components/Input1';
-
+/*
+Se encarga del funcionamiento general de la pagina que contiene los formularios, almacenando la informacion,
+pudiendo seleccionar en el mapa y escribiendo distintos valores para el archivo a subir.
+*/
 const MapWithNoSSR = dynamic(() => import("../components/DatosM").then((v) => v.Map), {
   ssr: false,
 });

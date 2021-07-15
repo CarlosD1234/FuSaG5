@@ -1,7 +1,9 @@
 import React from 'react';
 import styled, {css} from 'styled-components';
-//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+/*
+Se encarga de los estilos del formulario, cambiando de color, mostrando las leyendas
+y aspectos generales para darle efectos al formulario (feedback visual)
+*/
 const colores = {
 	borde: "#0075FF",
 	error: "#bb2929",

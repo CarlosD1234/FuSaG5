@@ -4,6 +4,10 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import "leaflet-defaulticon-compatibility";
 import {useState} from "react";
 
+/*
+Se encarga de la funcion mapa, al clickear deja un pointer dando latitud y longitud
+*/
+
 const MapEvents = ( {onClick, setPosition} ) =>{
   useMapEvents({
     click(event){
@@ -13,6 +17,7 @@ const MapEvents = ( {onClick, setPosition} ) =>{
   })
   return null;
 }
+
 export const Map = ( {onClick} ) => {
   const [position, setPosition] = useState({lat:-39.8139, lng: -73.2458})
   return (

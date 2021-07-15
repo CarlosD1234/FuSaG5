@@ -1,6 +1,9 @@
 import Head from 'next/head'
 import Link from "next/link";
 import * as React from "react"
+/*
+Se encarga de los estilos y la estructura de la pagina principal (indx)
+*/
 
 // 1. import `ChakraProvider` component
 import { ChakraProvider } from "@chakra-ui/react"
