@@ -1,8 +1,7 @@
 import React from 'react';
-import {Input2, Label, GrupoInput, LeyendaError, IconoValidacion} from './formularios1';
-//import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import {Input2, GrupoInput, LeyendaError} from './formularios1';
 
-const ComponenteInput = ({estado, cambiarEstado, tipo, label, placeholder, name, leyendaError, expresionRegular, funcion}) => {
+const ComponenteInput = ({estado, cambiarEstado, tipo, placeholder, name, leyendaError, expresionRegular, funcion}) => {
 	const onChange = (e) => {
 		cambiarEstado({...estado, campo: e.target.value});
 	}

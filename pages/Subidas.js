@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
-import { Box, Flex, Heading, Stack, Input, Button, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import { useState } from "react";
+import { Box, Flex, Heading, Stack, Input, Button, useColorMode} from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import * as React from "react";
+import Select from 'react-select'
 import axios from "axios";
-import { Formulario, Label, GrupoInput, LeyendaError, IconoValidacion } from "../components/formularios1";
 import ComponenteInput from '../components/Input1';
 
 const MapWithNoSSR = dynamic(() => import("../components/DatosM").then((v) => v.Map), {
@@ -66,8 +65,8 @@ export default function PrivatePage(props) {
         nomAudio.campo       + "\n" + 
         position.lat        + "\n" + 
         position.lng       + "\n" + 
-        dia.campo + " / " + mes.campo + " / " + anio.campo + "\n" +
-        horas.campo + " / " + minutos.campo + " / " + segundos.campo + "\n" +
+        diass.value + " / " + mesess.value + " / " + anioss.value + "\n" +
+        horass.value + " / " + minutoss.value + " / " + segundoss.value + "\n" +
         fuenteSonora.campo + "\n" + 
         descripcion.campo    + "\n" + 
         archivoNom.campo
@@ -86,26 +85,9 @@ export default function PrivatePage(props) {
 
 //Fechas
   const ValorDia = (event) => {
+    console.log(ValorDia);
     dia.campo = event.target.value;
   }
-
-  const ValorMes = (event) => {
-    mes.campo = event.target.value;
-  }
-
-  const ValorAnio = (event) => {
-    anio.campo = event.target.value;
-  }
-//Hora
-const ValorSegundos = (event) => {
-  segundos.campo = event.target.value;
-}
-const ValorMinutos = (event) => {
-  minutos.campo = event.target.value;
-}
-const ValorHoras = (event) => {
-  horas.campo = event.target.value;
-}
 
   const ValorFuentes = (event) => {
     fuenteSonora.campo = event.target.value;
@@ -118,16 +100,141 @@ const ValorHoras = (event) => {
 
 	const [nomAudio, cambiarNomAudio] = useState({campo: '', valido: null});
 
-	const [latT, cambiarLat] = useState({campo: '', valido: null});
-	const [lonN, cambiarLon] = useState({campo: '', valido: null});
+  const dias=[
+    { value: '1', label: '1'},
+    { value: '2', label: '2'},
+    { value: '3', label: '3'},
+    { value: '4', label: '4'},
+    { value: '5', label: '5'},
+    { value: '6', label: '6'},
+    { value: '7', label: '7'},
+    { value: '8', label: '8'},
+    { value: '9', label: '9'},
+    { value: '10', label: '10'},
+    { value: '11', label: '11'},
+    { value: '12', label: '12'},
+    { value: '13', label: '13'},
+    { value: '14', label: '14'},
+    { value: '15', label: '15'},
+    { value: '16', label: '16'},
+    { value: '17', label: '17'},
+    { value: '18', label: '18'},
+    { value: '19', label: '19'},
+    { value: '20', label: '20'},
+    { value: '21', label: '21'},
+    { value: '22', label: '22'},
+    { value: '23', label: '23'},
+    { value: '24', label: '24'},
+    { value: '25', label: '25'},
+    { value: '26', label: '26'},
+    { value: '27', label: '27'},
+    { value: '28', label: '28'},
+    { value: '29', label: '29'},
+    { value: '30', label: '30'},
+    { value: '31', label: '31'}
+  ]
+  const [diass, setDias] = useState(null);
+  const diasChange = (value) => {
+    setDias(value);
+    console.log(value);
+  }
 
-  const [dia, cambiarDia] = useState({campo: '', valido: null});
-  const [mes, cambiarMes] = useState({campo: '', valido: null});
-  const [anio, cambiarAnio] = useState({campo: '', valido: null});
+  const [mesess, setMeses] = useState(null);
+  const meses=[
+    { value: '1', label: 'Enero'},
+    { value: '2', label: 'Febrero'},
+    { value: '3', label: 'Marzo'},
+    { value: '4', label: 'Abril'},
+    { value: '5', label: 'Mayo'},
+    { value: '6', label: 'Junio'},
+    { value: '7', label: 'Julio'},
+    { value: '8', label: 'Agosto'},
+    { value: '9', label: 'Septiembre'},
+    { value: '10', label: 'Octubre'},
+    { value: '11', label: 'Noviembre'},
+    { value: '12', label: 'Diciembre'}
+  ]
+const mesesChange = (value) => {
+  setMeses(value);
+  console.log(value);
+}
+  const [anioss, setAnios] = useState(null);
+  const anios=[
+    { value: '2015', label: '2015'},
+    { value: '2016', label: '2016'},
+    { value: '2017', label: '2017'},
+    { value: '2018', label: '2018'},
+    { value: '2019', label: '2019'},
+    { value: '2020', label: '2020'},
+    { value: '2021', label: '2021'}
+  ]
+const aniosChange = (value) => {
+  setAnios(value);
+  console.log(value);
+}
+  const [minutoss, setMinutos] = useState(null);
+  const minutos=[
+    { value: '1', label: '1'},    { value: '2', label: '2'},    { value: '3', label: '3'},    { value: '4', label: '4'},
+    { value: '5', label: '5'},    { value: '6', label: '6'},    { value: '7', label: '7'},    { value: '8', label: '8'},
+    { value: '9', label: '9'},    { value: '10', label: '10'},    { value: '11', label: '11'},    { value: '12', label: '12'},    { value: '13', label: '13'},
+    { value: '14', label: '14'},    { value: '15', label: '15'},    { value: '16', label: '16'},    { value: '17', label: '17'},
+    { value: '18', label: '18'},    { value: '19', label: '19'},    { value: '20', label: '20'},    { value: '21', label: '21'},
+    { value: '22', label: '22'},    { value: '23', label: '23'},    { value: '24', label: '24'},    { value: '25', label: '25'},
+    { value: '26', label: '26'},    { value: '27', label: '27'},    { value: '28', label: '28'},    { value: '29', label: '29'},
+    { value: '30', label: '30'},    { value: '31', label: '31'},    { value: '32', label: '32'},    { value: '33', label: '33'},
+    { value: '34', label: '34'},    { value: '35', label: '35'},    { value: '36', label: '36'},    { value: '37', label: '37'},
+    { value: '38', label: '38'},    { value: '39', label: '39'},    { value: '40', label: '40'},    { value: '41', label: '41'},
+    { value: '42', label: '42'},    { value: '43', label: '43'},    { value: '44', label: '44'},    { value: '45', label: '45'},
+    { value: '46', label: '46'},    { value: '47', label: '47'},    { value: '48', label: '48'},    { value: '49', label: '49'},
+    { value: '50', label: '50'},    { value: '51', label: '51'},    { value: '52', label: '52'},    { value: '53', label: '53'},
+    { value: '54', label: '54'},    { value: '55', label: '55'},    { value: '56', label: '56'},    { value: '57', label: '57'},
+    { value: '58', label: '58'},    { value: '59', label: '59'}
+  ]
 
-  const [minutos, cambiarMinutos] = useState({campo: '', valido: null});
-  const [horas, cambiarHoras] = useState({campo: '', valido: null});
-  const [segundos, cambiarSegundos] = useState({campo: '', valido: null});
+const minutosChange = (value) => {
+  setMinutos(value);
+  console.log(value);
+}
+
+
+const horas=[
+  { value: '0', label: '0'},  { value: '1', label: '1'},    { value: '2', label: '2'},    { value: '3', label: '3'},    { value: '4', label: '4'},
+  { value: '5', label: '5'},    { value: '6', label: '6'},    { value: '7', label: '7'},    { value: '8', label: '8'},
+  { value: '9', label: '9'},    { value: '10', label: '10'},    { value: '11', label: '11'},    { value: '12', label: '12'},    { value: '13', label: '13'},
+  { value: '14', label: '14'},    { value: '15', label: '15'},    { value: '16', label: '16'},    { value: '17', label: '17'},
+  { value: '18', label: '18'},    { value: '19', label: '19'},    { value: '20', label: '20'},    { value: '21', label: '21'},
+  { value: '22', label: '22'},    { value: '23', label: '23'}
+]
+
+const [horass, setHoras] = useState(null);
+const horasChange = (value) => {
+setHoras(value);
+console.log(value);
+}
+
+  const segundos=[
+    { value: '1', label: '1'},    { value: '2', label: '2'},    { value: '3', label: '3'},    { value: '4', label: '4'},
+    { value: '5', label: '5'},    { value: '6', label: '6'},    { value: '7', label: '7'},    { value: '8', label: '8'},
+    { value: '9', label: '9'},    { value: '10', label: '10'},    { value: '11', label: '11'},    { value: '12', label: '12'},    { value: '13', label: '13'},
+    { value: '14', label: '14'},    { value: '15', label: '15'},    { value: '16', label: '16'},    { value: '17', label: '17'},
+    { value: '18', label: '18'},    { value: '19', label: '19'},    { value: '20', label: '20'},    { value: '21', label: '21'},
+    { value: '22', label: '22'},    { value: '23', label: '23'},    { value: '24', label: '24'},    { value: '25', label: '25'},
+    { value: '26', label: '26'},    { value: '27', label: '27'},    { value: '28', label: '28'},    { value: '29', label: '29'},
+    { value: '30', label: '30'},    { value: '31', label: '31'},    { value: '32', label: '32'},    { value: '33', label: '33'},
+    { value: '34', label: '34'},    { value: '35', label: '35'},    { value: '36', label: '36'},    { value: '37', label: '37'},
+    { value: '38', label: '38'},    { value: '39', label: '39'},    { value: '40', label: '40'},    { value: '41', label: '41'},
+    { value: '42', label: '42'},    { value: '43', label: '43'},    { value: '44', label: '44'},    { value: '45', label: '45'},
+    { value: '46', label: '46'},    { value: '47', label: '47'},    { value: '48', label: '48'},    { value: '49', label: '49'},
+    { value: '50', label: '50'},    { value: '51', label: '51'},    { value: '52', label: '52'},    { value: '53', label: '53'},
+    { value: '54', label: '54'},    { value: '55', label: '55'},    { value: '56', label: '56'},    { value: '57', label: '57'},
+    { value: '58', label: '58'},    { value: '59', label: '59'}
+  ]
+
+const [segundoss, setSegundos] = useState(null);
+const segundosChange = (value) => {
+  setSegundos(value);
+  console.log(value);
+}
 
   const [fuenteSonora, cambiarFuenteSonora] = useState({campo: '', valido: null});
 	const [descripcion, cambiarDescripcion] = useState({campo: '', valido: null});
@@ -138,23 +245,8 @@ const ValorHoras = (event) => {
 	const expresiones = {
 		nomAudio: /^[a-zA-Z0-9_-]{4,12}$/, // Letras, numeros, guion y guion_bajo
 		fuenteSonora: /^[a-zA-ZÀ-ÿ,._\s]{4,16}$/, // Letras y espacios, pueden llevar acentos.
-		lat: /^[Z0-9.]{1,6}$/, // 1 a 5 digitos.
-		lon: /^[Z0-9.]{1,6}$/,
-
-		dia: /^[Z0-9/]{2}$/, //DD
-    mes: /^[Z0-9/]{2}$/, //MM
-    anio: /^[Z0-9/]{4}$/, //YYYY
-
-    minutos:/^[Z0-9/:]{2}$/,
-    horas:/^[Z0-9/:]{2}$/,
-    segundos:/^[Z0-9/:]{2}$/,
-
 		descripcion: /^[a-zA-ZÀ-ÿ\s]{4,40}$/
 	}
-
-
-
-
 
   const {toggleColorMode} = useColorMode()
   return (
@@ -212,7 +304,6 @@ const ValorHoras = (event) => {
             estado={nomAudio}
             cambiarEstado={cambiarNomAudio}
             tipo="text"
-            //label="Nombre del audio"
             placeholder="audio_1"
             name="nomAudio"
             leyendaError="Error, debe ingresar un nombre válido. Entre 4 y 12 caracteres."
@@ -232,89 +323,65 @@ const ValorHoras = (event) => {
             </Heading>
           </Card>
 
-          <Flex>
-            <ComponenteInput 
-              estado={dia}
-              cambiarEstado={cambiarDia}
-              tipo="text"
-              placeholder="DD"
-              name="dia"
-              leyendaError="Debe tener forma DD."
-              expresionRegular={expresiones.dia}
-              onChange = { ValorDia }
+          <Flex
+            padding="1em"
+            justifyContent= 'space-between'
+            >
+            <Select
+              style={{width:"200px"}}
+              value={diass}
+              options={dias}
+              onChange={diasChange}
             />
-            <Heading width="20px">
-                / 
-            </Heading>
-            <ComponenteInput 
-              estado={mes}
-              cambiarEstado={cambiarMes}
-              tipo="text"
-              placeholder="MM"
-              name="mes"
-              leyendaError="Debe tener forma MM."
-              expresionRegular={expresiones.mes}
-              onChange = { ValorMes }
+
+            <Select
+              style={{width:"200px"}}
+              value={mesess}
+              options={meses}
+              onChange={mesesChange}
             />
-            <Heading width="20px">
-                / 
-            </Heading>
-            <ComponenteInput 
-              estado={anio}
-              cambiarEstado={cambiarAnio}
-              tipo="text"
-              placeholder="YYYY"
-              name="anio"
-              leyendaError="Debe tener forma YYYY."
-              expresionRegular={expresiones.anio}
-              onChange = { ValorAnio }
+
+            <Select
+              style={{width:"200px"}}
+              value={anioss}
+              options={anios}
+              onChange={aniosChange}
             />
 
           </Flex>
 
           <Card>
             <Heading as="h3" fontSize="1.5em">
-              Hora de grabación
+              Hora de grabación hh:mm:ss
             </Heading>
           </Card>
 
-          <Flex>
-            <ComponenteInput  
-              estado={horas}
-              cambiarEstado={cambiarHoras}
-              tipo="text"
-              placeholder="00"
-              name="horas"
-              leyendaError="Debe tener forma 00."
-              expresionRegular={expresiones.horas}
-              onChange = { ValorHoras } 
+
+          <Flex 
+            padding="1em"
+            justifyContent= 'space-between'
+            >
+
+            <Select 
+              style={{width:"200px"}}
+              value={horass}
+              options={horas}
+              onChange={horasChange}
             />
-            <Heading width="20px">
-                : 
-            </Heading>
-            <ComponenteInput  
-              estado={segundos}
-              cambiarEstado={cambiarMinutos}
-              tipo="text"
-              placeholder="00"
-              name="minutos"
-              leyendaError="Debe tener forma 00."
-              expresionRegular={expresiones.minutos}
-              onChange = { ValorMinutos } 
+            <Select
+              style={{width:"200px"}}
+              value={minutoss}
+              options={minutos}
+              onChange={minutosChange}
             />
-            <Heading width="20px">
-                : 
-            </Heading>
-            <ComponenteInput  
-              estado={segundos}
-              cambiarEstado={cambiarSegundos}
-              tipo="text"
-              placeholder="00"
-              name="segundos"
-              leyendaError="Debe tener forma 00."
-              expresionRegular={expresiones.segundos}
-              onChange = { ValorSegundos } 
+
+            <Select
+              style={{width:"200px"}}
+              value={segundoss}
+              options={segundos}
+              onChange={segundosChange}
             />
+
           </Flex>
 
           <Card>
@@ -400,15 +467,6 @@ const ValorHoras = (event) => {
         .title,
         .description {
           text-align: center;
-        }
-
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-            Bitstream Vera Sans Mono, Courier New, monospace;
         }
 
         .card {
