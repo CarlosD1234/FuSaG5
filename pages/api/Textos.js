@@ -6,7 +6,7 @@ import { promises } from "fs";
  */
 
 /*
-Se encarga de la escritura de texto del archivo
+Se encarga de la escritura de texto del archivo.
 */
 export default async (req, res) => {
     await promises.writeFile(req.body.name, req.body.data, {
