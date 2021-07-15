@@ -1,6 +1,8 @@
 import formidable from "formidable";
 import fs from "fs";
-
+/*
+Se encarga de los aspectos generales del archivo a subir.
+*/
 export const config = {
   api: {
     bodyParser: false

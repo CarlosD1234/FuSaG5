@@ -1,13 +1,11 @@
 import Head from "next/head";
-import Link from "next/link";
-import Image from "next/image";
 import dynamic from "next/dynamic";
 import * as React from "react";
 
 const MapWithNoSSR = dynamic(() => import("../components/DatosM").then((v) => v.Map), {
   ssr: false,
 });
-
+//Mapa grande de Valdivia, además de un botón en la parte inferior que nos permite acceder a la subida de archivos.
 export default function Principal() {
   return (
     <div className="container">

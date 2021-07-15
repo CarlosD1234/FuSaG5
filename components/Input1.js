@@ -1,8 +1,10 @@
 import React from 'react';
-import {Input2, Label, GrupoInput, LeyendaError, IconoValidacion} from './formularios1';
-//import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
-
-const ComponenteInput = ({estado, cambiarEstado, tipo, label, placeholder, name, leyendaError, expresionRegular, funcion}) => {
+import {Input2, GrupoInput, LeyendaError} from './formularios1';
+/*
+Se encarga de los componentes Input del formulario de manera generica,
+sirve para validar cuando hay cambio de color (formulario1.js)
+*/
+const ComponenteInput = ({estado, cambiarEstado, tipo, placeholder, name, leyendaError, expresionRegular, funcion}) => {
 	const onChange = (e) => {
 		cambiarEstado({...estado, campo: e.target.value});
 	}
